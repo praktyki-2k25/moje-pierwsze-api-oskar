@@ -1,6 +1,6 @@
 // database.js - Moduł obsługi bazy danych SQLite
-// Autor: [Wpisz swoje imię i nazwisko]
-// Data: [Wpisz datę]
+// Autor: Oskar Szulga
+// Data: 04.09.2025
 
 const sqlite3 = require('sqlite3').verbose();
 const { open } = require('sqlite');
