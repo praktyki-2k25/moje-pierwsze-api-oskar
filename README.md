@@ -14,7 +14,7 @@
     "learning",
     "workshop"
   ],
-  "author": "Twoje Imię",
+  "author": "Oskar",
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
