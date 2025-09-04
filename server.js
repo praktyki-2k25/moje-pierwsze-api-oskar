@@ -546,20 +546,45 @@ const requestHandler = async (request, response) => {
     }
 };
  
-// Utworzenie serwera
-const server = http.createServer(requestHandler);
- 
-// Uruchomienie serwera
-server.listen(PORT, HOST, () => {
-    console.log(`🚀 Serwer uruchomiony!`);
-    console.log(`📍 Adres: http://${HOST}:${PORT}`);
-    console.log(`📝 Dostępne endpointy:`);
-    console.log(`   - GET  http://${HOST}:${PORT}/`);
-    console.log(`   - GET  http://${HOST}:${PORT}/about`);
-    console.log(`   - GET  http://${HOST}:${PORT}/time`);
-    console.log(`   - GET  http://${HOST}:${PORT}/greeting?name=Jan&lang=pl`);
-    console.log(`   - GET  http://${HOST}:${PORT}/counter`);
-    console.log(`   - POST http://${HOST}:${PORT}/echo`);
-    console.log(`   - GET  http://${HOST}:${PORT}/my-endpoint`);
-    console.log(`\n⌨️  Naciśnij Ctrl+C aby zatrzymać serwer`);
+// Funkcja startowa z inicjalizacją bazy danych
+async function startServer() {
+    try {
+        // Inicjalizuj bazę danych
+        db = await initializeDB();
+        console.log('✅ Baza danych połączona');
+        
+        // Utworzenie serwera
+        const server = http.createServer(requestHandler);
+        
+        // Uruchomienie serwera
+        server.listen(PORT, HOST, () => {
+            console.log(`\n🚀 Serwer uruchomiony z bazą danych!`);
+            console.log(`📍 Adres: http://${HOST}:${PORT}`);
+            console.log(`\n📝 Dostępne endpointy:`);
+            console.log(`\n   STARE ENDPOINTY (bez bazy):`);
+            console.log(`   - GET  http://${HOST}:${PORT}/`);
+            console.log(`   - GET  http://${HOST}:${PORT}/about`);
+            console.log(`   - GET  http://${HOST}:${PORT}/time`);
+            console.log(`   - GET  http://${HOST}:${PORT}/greeting?name=Jan&lang=pl`);
+            console.log(`   - GET  http://${HOST}:${PORT}/counter`);
+            console.log(`   - POST http://${HOST}:${PORT}/echo`);
+            console.log(`   - GET  http://${HOST}:${PORT}/my-endpoint`);
+            console.log(`\n   NOWE ENDPOINTY (z bazą danych):`);
+            console.log(`   - GET    http://${HOST}:${PORT}/api/users`);
+            console.log(`   - GET    http://${HOST}:${PORT}/api/users/:id`);
+            console.log(`   - POST   http://${HOST}:${PORT}/api/users`);
+            console.log(`   - PUT    http://${HOST}:${PORT}/api/users/:id`);
+            console.log(`   - DELETE http://${HOST}:${PORT}/api/users/:id`);
+            console.log(`   - GET    http://${HOST}:${PORT}/api/stats`);
+            console.log(`   - GET    http://${HOST}:${PORT}/api/todos`);
+            console.log(`\n⌨️  Naciśnij Ctrl+C aby zatrzymać serwer\n`);
+        });
+    } catch (error) {
+        console.error('❌ Błąd podczas uruchamiania serwera:', error);
+        process.exit(1);
+    }
+}
+
+// Uruchom serwer
+startServer();
 });
