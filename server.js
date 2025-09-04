@@ -131,7 +131,7 @@ const requestHandler = (request, response) => {
         // prosty kalkulator, generator haseł, itp.
         response.statusCode = 200;
         response.end(JSON.stringify({
-            message: "To jest miejsce na Twój własny, kreatywny endpoint!",
+            message: "Czasem trzeba się zgubić, żeby znaleźć właściwą drogę.",
             hint: "Zmodyfikuj ten kod według własnego pomysłu"
         }));
     }
