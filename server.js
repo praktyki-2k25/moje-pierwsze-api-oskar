@@ -587,4 +587,3 @@ async function startServer() {
 
 // Uruchom serwer
 startServer();
-});
